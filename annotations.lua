@@ -24,7 +24,7 @@ local K2Z_COLORS = {
     ["green"] = "#5fb236",
     ["olive"] = "#88ff77",
     ["cyan"] = "#00ffee",
-    ["blue"] = "#0066ff",
+    ["blue"] = "#2ea8e5",
     ["purple"] = "#a28ae5",
     ["gray"] = "#aaaaaa",
 }

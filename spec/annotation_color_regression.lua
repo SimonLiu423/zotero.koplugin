@@ -31,6 +31,8 @@ end
 local function create(items_to_upload)
     local created, failed = {}, {}
     for i, item in ipairs(items_to_upload) do
+        assert(item.annotationColor == '#2ea8e5',
+            ('KOReader blue mapped to %s instead of Zotero blue'):format(item.annotationColor))
         if item.annotationColor:match('^#[0-9a-f][0-9a-f][0-9a-f][0-9a-f][0-9a-f][0-9a-f]$') then
             created[i] = { key = 'CREATED' .. i }
         else
