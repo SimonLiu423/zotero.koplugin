@@ -2358,16 +2358,12 @@ function API.createItems(items)
             return created_items, "Error: failed to parse JSON in response to annotation creation request"
         end
 
-        -- Maybe don't update library version in here, becase we can't be sure that we have synced all items yet
-        -- Should run a library update after we have finished creating new items...
-
-        --local new_library_version = response_headers["last-modified-version"]
-        ----        print("New lib version: ", new_library_version)
-        --if new_library_version ~= nil then
-        --API.setUserLibraryVersion(new_library_version)
-        --else
-        --logger.err("Z: could not update library version from create request, got " .. tostring(new_library_version))
-        --end
+        -- The next write must use the version assigned by this one. Keep it in
+        -- memory until the library sync updates the database version.
+        local new_library_version = response_headers and tonumber(response_headers["last-modified-version"])
+        if new_library_version then
+            API.libVersion = new_library_version
+        end
         --print(JSON.encode(result))
         for k, v in pairs(result["successful"]) do
             local index = start_item + tonumber(k) + 1
